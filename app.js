@@ -1,8 +1,25 @@
+// ERROR MESSAGE
+
+let errMsgValue = document.getElementById("errorMessage");
+
+function showError(message) {
+    errMsgValue.textContent = message;
+    errMsgValue.style.display = "block";
+}
+
+function clearError() {
+    errMsgValue.textContent = "";
+    errMsgValue.style.display = "none";
+}
+
+// CALCULATION
+
 let prices = [120, 80, 40];
 let roomTypes = ["Sea View", "Second Sea View", "Garden View"];
 let bookBtnValue = document.getElementById("bookBtn");
 
 bookBtnValue.onclick = function() {
+    
     let customerNameValue = document.getElementById("customerName").value;
     let dateInValue = document.getElementById("dateIn").value;
     let dateOutValue = document.getElementById("dateOut").value;
@@ -10,8 +27,18 @@ bookBtnValue.onclick = function() {
     let roomTypeValue = document.getElementById("roomType").value;
     let roomType = roomTypes[roomTypeValue - 1];
     let roomsValue = document.getElementById("rooms").value;
-    
+
+    // debug
+    // console.log("roomTypeValue:", roomTypeValue);
+
     let price = 0;
+
+    if (!roomTypeValue || !daysValue || !roomsValue) {
+        showError("Please enter all the required information."); 
+        return;
+    }
+              
+    clearError();
 
     if (roomTypeValue == 1) {
         price = prices[0] * daysValue * roomsValue;
@@ -24,6 +51,8 @@ bookBtnValue.onclick = function() {
     }
 
     displayQuotation(customerNameValue, dateInValue, dateOutValue, roomType, roomsValue, price);
+    resetValues();    
+    
 }
 
 function displayQuotation(name, dateIn, dateOut, type, room, price) {
@@ -43,4 +72,13 @@ function displayQuotation(name, dateIn, dateOut, type, room, price) {
     typeCell.textContent = type;
     roomCell.textContent = room;
     priceCell.textContent = "$" + price.toFixed(2);
+}
+
+function resetValues() {
+    document.getElementById("customerName").value = "";
+    document.getElementById("dateIn").value = "";
+    document.getElementById("dateOut").value = "";
+    document.getElementById("days").value = "";
+    document.getElementById("roomType").value = "";
+    document.getElementById("rooms").value = "";    
 }

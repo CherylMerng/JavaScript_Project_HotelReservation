@@ -9,6 +9,11 @@
 </head>
 <body>
     <div class="container my-5 w-50">
+
+        <div class="col ms-3 me-3">
+            <div id="errorMessage" class="alert alert-warning mt-3" style="display: none;"></div>   
+        </div>
+
         <h1 class="display-4 text-center">Ngapali Hotel</h1>
 
         <label for="customerName" class="mt-4 mb-2">Customer Name:</label>
@@ -25,7 +30,7 @@
 
         <label for="roomType" class="mt-4 mb-2">Room Type:</label>
         <select name="roomType" id="roomType" class="form-select">
-            <option value="0" selected disabled>Choose room type - 1,2,3</option>
+            <option value="" disabled selected>Choose room type - 1,2,3</option>
             <option value="1">(1) Sea View - $120</option>
             <option value="2">(2) Second Sea View - $80</option>
             <option value="3">(3) Garden View - $40</option>
