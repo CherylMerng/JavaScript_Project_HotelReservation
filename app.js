@@ -1,3 +1,8 @@
+// Calculated date difference and auto-showed length of stay
+// Used array for output (quotation)
+
+// ////////////////////////////////////////////////////////////////////////
+
 // ERROR MESSAGE
 
 let errMsgValue = document.getElementById("errorMessage");
@@ -99,21 +104,39 @@ function displayQuotation(name, dateIn, dateOut, days, type, rooms, price) {
     let quoteTable = document.getElementById("quoteTable");
     let row = quoteTable.insertRow(-1);
 
-    let nameCell = row.insertCell(0);
-    let dateInCell = row.insertCell(1);
-    let dateOutCell = row.insertCell(2);
-    let daysCell = row.insertCell(3);
-    let typeCell = row.insertCell(4);
-    let roomsCell = row.insertCell(5);
-    let priceCell = row.insertCell(6);
+    // attempt 3
+    let inputList = [name, dateIn, dateOut, days, type, rooms, price];
+    let cellCounter = 0;
 
-    nameCell.textContent = name;
-    dateInCell.textContent = dateIn;
-    dateOutCell.textContent = dateOut;
-    daysCell.textContent = days;
-    typeCell.textContent = type;
-    roomsCell.textContent = rooms;
-    priceCell.textContent = "$" + price.toFixed(2);
+    inputList.forEach( (value => {
+        row.insertCell(cellCounter++).textContent = value;
+    }))
+
+    // attempt 2
+    // row.insertCell(0).textContent = name;
+    // row.insertCell(1).textContent = dateIn;
+    // row.insertCell(2).textContent = dateOut;
+    // row.insertCell(3).textContent = days;
+    // row.insertCell(4).textContent = type;
+    // row.insertCell(5).textContent = rooms;
+    // row.insertCell(6).textContent = `$${price.toFixed(2)}`;
+
+    // attempt 1
+    // let nameCell = row.insertCell(0);
+    // let dateInCell = row.insertCell(1);
+    // let dateOutCell = row.insertCell(2);
+    // let daysCell = row.insertCell(3);
+    // let typeCell = row.insertCell(4);
+    // let roomsCell = row.insertCell(5);
+    // let priceCell = row.insertCell(6);
+    
+    // nameCell.textContent = name;
+    // dateInCell.textContent = dateIn;
+    // dateOutCell.textContent = dateOut;
+    // daysCell.textContent = days;
+    // typeCell.textContent = type;
+    // roomsCell.textContent = rooms;
+    // priceCell.textContent = `$${price.toFixed(2)}`;
 }
 
 function resetValues() {

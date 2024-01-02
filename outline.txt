@@ -1,0 +1,12 @@
+let users = [
+    {"name": "Ko", "gender": "male"},
+    {"name": "Ko", "gender": "male"},
+]
+
+users.map() => gender = "Male"
+
+let lists = ["name". "datein", etc.,]
+
+lists.forEach((value)=> {
+    value.insertCell(0).textContent = value
+})
