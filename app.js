@@ -7,22 +7,35 @@
 
 let errMsgValue = document.getElementById("errorMessage");
 
-function showError(message) {
-    errMsgValue.textContent = message;
-    errMsgValue.style.display = "block";
+// v2
+function err(type, msg) {
+    if (type == 1) {
+        errMsgValue.textContent = msg;
+        errMsgValue.style.display = "block";
+    }
+    else {
+        errMsgValue.textContent = "";
+        errMsgValue.style.display = "none";
+    }
 }
 
-function clearError() {
-    errMsgValue.textContent = "";
-    errMsgValue.style.display = "none";
-}
+// v1
+// function showError(message) {
+//     errMsgValue.textContent = message;
+//     errMsgValue.style.display = "block";
+// }
+
+// function clearError() {
+//     errMsgValue.textContent = "";
+//     errMsgValue.style.display = "none";
+// }
 
 // CALCULATION
 
 let prices = [120, 80, 40];
 let roomTypes = ["Sea View", "Second Sea View", "Garden View"];
 
-function dateDiffInDays(a, b) {  //accept Date objects as parameters
+function dateDiffInDays(a, b) {  // accept Date objects as parameters
     const _MS_PER_DAY = 1000 * 60 * 60 * 24;
     // Discard the time and time-zone information.
     const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
@@ -47,13 +60,17 @@ function updateDuration() {
     let daysValue = dateDiffInDays(dateInValue, dateOutValue);
 
     if (daysValue <= 0) {
-        showError("Please enter valid dates. Check-out date must be after check-in date.");
+        err(1, "Please enter valid dates. Check-out date must be after check-in date.");
+        // showError("Please enter valid dates. Check-out date must be after check-in date.");
+
         document.getElementById("days").value = "";
         return;
     }
 
     document.getElementById("days").value = daysValue;
-    clearError();
+
+    err(0);
+    // clearError();
 }
 
 let bookBtnValue = document.getElementById("bookBtn");
@@ -67,11 +84,13 @@ bookBtnValue.onclick = function() {
     let roomsValue = document.getElementById("rooms").value;
     
     if (!customerNameValue || !dateInValue || !dateOutValue || !roomTypeValue || !roomsValue) {
-        showError("Please enter all the required information.");
+        err(1, "Please enter all the required information.");
+        // showError("Please enter all the required information.");
         return;
     }
     if (!daysValue) {
-        showError("Check-out date must be after check-in date.");
+        err(1, "Check-out date must be after check-in date.");
+        // showError("Check-out date must be after check-in date.");
         return;
     }
     
@@ -104,7 +123,7 @@ function displayQuotation(name, dateIn, dateOut, days, type, rooms, price) {
     let quoteTable = document.getElementById("quoteTable");
     let row = quoteTable.insertRow(-1);
 
-    // attempt 3
+    // v3
     let inputList = [name, dateIn, dateOut, days, type, rooms, price];
     let cellCounter = 0;
 
@@ -112,7 +131,7 @@ function displayQuotation(name, dateIn, dateOut, days, type, rooms, price) {
         row.insertCell(cellCounter++).textContent = value;
     }))
 
-    // attempt 2
+    // v2
     // row.insertCell(0).textContent = name;
     // row.insertCell(1).textContent = dateIn;
     // row.insertCell(2).textContent = dateOut;
@@ -121,7 +140,7 @@ function displayQuotation(name, dateIn, dateOut, days, type, rooms, price) {
     // row.insertCell(5).textContent = rooms;
     // row.insertCell(6).textContent = `$${price.toFixed(2)}`;
 
-    // attempt 1
+    // v1
     // let nameCell = row.insertCell(0);
     // let dateInCell = row.insertCell(1);
     // let dateOutCell = row.insertCell(2);
@@ -146,5 +165,7 @@ function resetValues() {
     document.getElementById("days").value = "";
     document.getElementById("roomType").value = "";
     document.getElementById("rooms").value = "";    
-    clearError();
+    
+    err(0);
+    //clearError();
 }
